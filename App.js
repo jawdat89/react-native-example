@@ -8,38 +8,33 @@ import {
   FlatList
 } from 'react-native';
 
+import GoalItem from './components/GoalItem';
+import GoalInput from './components/GoalInput';
+
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
 
-  const onChangTextHandler = (changedText) => {
-    setEnteredGoal(changedText);
+  const addGoalHandler = goalTitle => {
+    setCourseGoals(currentGoals => [
+      ...currentGoals,
+      { idx: Math.random(), value: goalTitle }
+    ]);
   }
 
-  const addGoalHandler = () => {
-    setCourseGoals(currentGoals => [...currentGoals, { uid: Math.random(), value: enteredGoal}]);
+  const removeGoalHandler = goalIdx => {
+    setCourseGoals(currentGoals => {
+      return currentGoals.filter(g => g.idx !== goalIdx);
+    })
   }
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Course Goal"
-          style={styles.input}
-          onChangeText={onChangTextHandler}
-          value={enteredGoal}
-        />
-        <Button title="Add" onPress={addGoalHandler} />
-      </View>
+      <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => item.idx}
         data={courseGoals}
-        renderItem={itemData => (
-        <View style={styles.listItem}>
-          <Text Text>{itemData.item.value}</Text>
-        </View>
-        )}
+        renderItem={itemData => <GoalItem idx={itemData.item.idx} onDelete={removeGoalHandler} title={itemData.item.value}/>}
       />
     </View>
   );
@@ -49,19 +44,4 @@ const styles = StyleSheet.create({
   screen: {
     padding: 50
   },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  listItem: {
-    marginVertical: 10,
-    padding: 10,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  input: {
-    fontSize: 24
-  }
 });
