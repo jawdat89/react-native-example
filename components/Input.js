@@ -1,10 +1,12 @@
 import React, { } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 
+import CustomStyles from '../constants/default-styles';
+
 const Input = props => { 
     return (
         <View>
-            <TextInput {...props} style={{ ...styles.bodyText, ...styles.input, ...props.style }} />
+            <TextInput {...props} style={{ ...CustomStyles.bodyText, ...styles.input, ...props.style }} />
         </View>
     );
 };

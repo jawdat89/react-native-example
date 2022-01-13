@@ -9,8 +9,10 @@ import {
     Alert
 } from 'react-native';
 
-import Card from '../components/Card'; 
 import Colors from '../constants/colors';
+import CustomStyles from '../constants/default-styles';
+
+import Card from '../components/Card'; 
 import Input from '../components/Input';
 import NumberContainer  from '../components/NumberContainer';
 
@@ -49,7 +51,7 @@ const StartGameScreen = props => {
     if (confirmed) {
         confirmedOutput = (
             <Card style={styles.summaryContainer}>
-                <Text>You selected</Text>
+                <Text style={CustomStyles.bodyText}>You selected</Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
                 <Button title='START GAME' onPress={() => props.onStartGame(selectedNumber)} />
             </Card>
@@ -61,9 +63,9 @@ const StartGameScreen = props => {
     return (
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
             <View style={styles.screen}>
-                <Text style={styles.title}> Start a New Game </Text>
+                <Text style={CustomStyles.title}> Start a New Game </Text>
                 <Card style={styles.inputConatainer}>
-                    <Text>Select a number</Text>
+                    <Text style={CustomStyles.bodyText}>Select a number</Text>
                     <Input
                         style={styles.input}
                         blurOnSubmit
