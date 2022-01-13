@@ -3,6 +3,8 @@ import { View, StyleSheet, Text, Button, Image } from 'react-native';
 
 import CustomStyles from '../constants/default-styles';
 
+import MainButton from '../components/MainButton';
+
 const GameOverScreen = props => {
     return (
         <View style={styles.screen}>
@@ -15,8 +17,10 @@ const GameOverScreen = props => {
                     resizeMode='stretch'    
                     />
             </View>
-            <Text style={CustomStyles.bodyText}>Your phone needed <Text style={{ ...CustomStyles.title, ...styles.deviceText }}>{props.roundsNumber}</Text> rounds to guess the number <Text style={styles.userText}>{props.userNumber}</Text></Text>
-            <Button title='NEW GAME' onPress={props.onRestart} />
+            <View style={styles.resultContainer}>
+                <Text style={{ ...CustomStyles.bodyText, ...styles.resultText }}>Your phone needed <Text style={{ ...CustomStyles.title, ...styles.deviceText }}>{props.roundsNumber}</Text> rounds to guess the number <Text style={styles.userText}>{props.userNumber}</Text></Text>
+            </View>
+            <MainButton onPress={props.onRestart} >NEW GAME</MainButton>
         </View>
     );
 };
@@ -37,6 +41,12 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
+    },
+    resultContainer: {
+        width: '90%',
+    },
+    resultText: {
+        textAlign: 'center'
     },
     deviceText: {
         color: 'red',
