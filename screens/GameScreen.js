@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Text, FlatList, Alert } from 'react-native';
+import { View, StyleSheet, Text, FlatList, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 
 import CustomStyles from '../constants/default-styles';
@@ -62,6 +62,12 @@ const GameScreen = props => {
         setCurrentGuess(nextNumber);
         // setRounds(currentRounds => currentRounds + 1);
         setPastGuesses(curPastGuesses => [nextNumber, ...curPastGuesses]);
+
+        // let listContainerStyle = styles.listContainer;
+
+        // if (Dimensions.get('window').width < 500) {
+
+        // }
     };
 
     return (
@@ -99,13 +105,13 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 20,
+        marginTop: Dimensions.get('window').height > 900 ? 20 : 10,
         width: 400,
         maxWidth: '90%'
     },
     listContainer: {
         flex: 1,
-        width: '60%'
+        width: Dimensions.get('window').height > 500 ? '60%' : '80%'
     },
     list: {
         flexGrow: 1,

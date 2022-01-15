@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, Dimensions, ScrollView } from 'react-native';
 
 import CustomStyles from '../constants/default-styles';
 
@@ -7,7 +7,8 @@ import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
     return (
-        <View style={styles.screen}>
+        <ScrollView>
+            <View style={styles.screen}>
             <Text style={CustomStyles.title}>The game is over!</Text>
             <View style={styles.imageContainer}>
                 <Image
@@ -21,7 +22,8 @@ const GameOverScreen = props => {
                 <Text style={{ ...CustomStyles.bodyText, ...styles.resultText }}>Your phone needed <Text style={{ ...CustomStyles.title, ...styles.deviceText }}>{props.roundsNumber}</Text> rounds to guess the number <Text style={styles.userText}>{props.userNumber}</Text></Text>
             </View>
             <MainButton onPress={props.onRestart} >NEW GAME</MainButton>
-        </View>
+            </View>
+        </ScrollView>
     );
 };
 
@@ -32,11 +34,12 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     imageContainer: {
-        width: '80%',
-        height: 200,
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.4,
         borderRadius: 50,
         borderWidth: 3,
-        overflow:'hidden'
+        overflow:'hidden',
+        marginVertical: Dimensions.get('window').height / 20
     },
     image: {
         width: '100%',
@@ -44,9 +47,11 @@ const styles = StyleSheet.create({
     },
     resultContainer: {
         width: '90%',
+        marginVertical: Dimensions.get('window').height / 20
     },
     resultText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: Dimensions.get('window').fontScale * 22
     },
     deviceText: {
         color: 'red',
